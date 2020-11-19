@@ -49,8 +49,8 @@ class ElasticTransport extends Transport
     public function __construct(ClientInterface $client, $key, $account)
     {
     	$this->client = $client;
-      $this->key = $key;
-      $this->account = $account;
+        $this->key = $key;
+        $this->account = $account;
     }
 
     /**
@@ -73,7 +73,7 @@ class ElasticTransport extends Transport
 			'to' => $this->getEmailAddresses($message),
             'subject' => $message->getSubject(),
             'body_html' => $message->getBody(),
-	    'body_text' => $this->getText($message)
+	        'body_text' => $this->getText($message)
         ];
 
         $result = $this->client->post($this->url, [
@@ -95,8 +95,7 @@ class ElasticTransport extends Transport
 
         foreach($message->getChildren() as $child)
 		{
-			if($child->getContentType() == 'text/plain')
-			{
+			if ($child->getContentType() === 'text/plain') {
 				$text = $child->getBody();
 			}
 		}
@@ -121,10 +120,10 @@ class ElasticTransport extends Transport
 	{
 		$data = call_user_func([$message, $method]);
 
-		if(is_array($data))
-		{
+		if (is_array($data)) {
 			return implode(',', array_keys($data));
 		}
+
 		return '';
 	}
 }

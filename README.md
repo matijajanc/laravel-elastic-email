@@ -12,9 +12,16 @@ composer require chocoholics/laravel-elastic-email
 
 Next, add the following to your config/services.php and add the correct values to your .env file
 ```php
-'elastic_email' => [
+'elasticemail' => [
 	'key' => env('ELASTIC_KEY'),
 	'account' => env('ELASTIC_ACCOUNT')
+]
+```
+
+and this to your config/mail.php under mailers
+```php
+'elasticemail' => [
+    'transport' => 'elasticemail',
 ]
 ```
 
@@ -31,7 +38,7 @@ Next, in config/app.php, comment out Laravel's default MailServiceProvider. If u
 ],
 ```
 
-Finally switch your default mail provider to elastic email in your .env file by setting MAIL_DRIVER=elastic_email
+Finally switch your default mail provider to elastic email in your .env file by setting MAIL_MAILER=elasticemail
 
 ### Usage ###
 

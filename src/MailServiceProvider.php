@@ -7,14 +7,14 @@ use Illuminate\Mail\MailServiceProvider as LaravelMailServiceProvider;
 class MailServiceProvider extends LaravelMailServiceProvider
 {
 	/**
-     * Register the Swift Transport instance.
+     * Register the Mail Manager instance.
      *
      * @return void
      */
-    protected function registerSwiftTransport()
+    protected function registerIlluminateMailer()
     {
-        $this->app->singleton('swift.transport', function ($app) {
-		return new TransportManager($app);
-	});
+        $this->app->singleton('mail.manager', function ($app) {
+		    return new TransportManager($app);
+	    });
     }
 }
