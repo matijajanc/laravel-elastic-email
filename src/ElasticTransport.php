@@ -98,10 +98,6 @@ class ElasticTransport extends Transport
         $result = curl_exec($ch);
         curl_close($ch);
 
-        if ($attachmentCount > 0) {
-            $this->deleteTempAttachmentFiles($data, $attachmentCount);
-        }
-
         return $result;
     }
 
@@ -188,20 +184,5 @@ class ElasticTransport extends Transport
             return implode(',', array_keys($data));
         }
         return '';
-    }
-
-    /**
-     * delete temp attachment files
-     * @param $data
-     * @param $count
-     */
-    protected function deleteTempAttachmentFiles($data, $count)
-    {
-        for ($i = 1; $i <= $count; $i++) {
-            $file = $data['file_' . $i]->name;
-            if (file_exists($file)) {
-                unlink($file);
-            }
-        }
     }
 }
